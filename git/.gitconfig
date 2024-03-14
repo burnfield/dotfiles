@@ -1,3 +1,5 @@
 [user]
 	email = oskar.branfeldt@gmail.com
 	name = Oskar Branfeldt
+[alias]
+    st = status
