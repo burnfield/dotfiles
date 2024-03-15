@@ -5,11 +5,10 @@ if command -v fzf-share >/dev/null; then
   source "$(fzf-share)/completion.bash"
 fi
 
-function parse_git_dirty {
-  [[ $(git status --porcelain 2> /dev/null) ]] && echo "*"
-}
-function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ (\1$(parse_git_dirty))/"
+function _update_ps1() {
+    PS1="$(powerline-go -newline -hostname-only-if-ssh -theme low-contrast -error $? -jobs $(jobs -p | wc -l))"
 }
 
-export PS1="\n\t \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
+if [ "$TERM" != "linux" ]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
