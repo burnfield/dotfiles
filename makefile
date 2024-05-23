@@ -1,5 +1,5 @@
 all:
-	stow --verbose --target=$$HOME --restow */
+	cd home; make all; cd -
 
 delete:
-	stow --verbose --target=$$HOME --delete */
+	cd home; make delete; cd -

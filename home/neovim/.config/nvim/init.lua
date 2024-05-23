@@ -63,3 +63,4 @@ vim.o.completeopt=menu,menuone,noinsert,noselect
 require("lazy").setup("plugins")
 vim.o.background = "light" -- or "light" for light mode
 vim.cmd([[colorscheme catppuccin-latte]])
+require"lspconfig".rust_analyzer.setup{}

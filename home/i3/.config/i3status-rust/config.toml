@@ -8,9 +8,14 @@ theme = "ctp-latte"
 
 [icons]
 icons = "awesome4"
-[icons.overrides]
-bat = ["|E|", "|_|", "|=|", "|F|"]
-bat_charging = "|^| "
+
+[[block]]
+block = "net"
+format = " $icon {$signal_strength $ssid $frequency} "
+
+[[block]]
+block = "battery"
+format = " $icon $percentage "
 
 [[block]]
 block = "cpu"
