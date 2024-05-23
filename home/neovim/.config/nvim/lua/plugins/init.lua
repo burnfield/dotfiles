@@ -10,7 +10,7 @@ return {
     'nvim-lua/plenary.nvim',
     {
         "sainnhe/everforest",
-        lazy=false,
+        lazy = false,
         priority = 1000,
         config = true,
         opts = ...
@@ -28,8 +28,8 @@ return {
     {
         'tpope/vim-fugitive',
         keys = {
-            { "<leader>gb", "<cmd>Git blame<cr>", desc = "Blame" },
-            { "<leader>gd", "<cmd>Git difftool<cr>", desc = "Difftool" },
+            { "<leader>gb", "<cmd>Git blame<cr>",     desc = "Blame" },
+            { "<leader>gd", "<cmd>Git difftool<cr>",  desc = "Difftool" },
             { "<leader>gm", "<cmd>Git mergetool<cr>", desc = "Mergetool" },
         },
     },
