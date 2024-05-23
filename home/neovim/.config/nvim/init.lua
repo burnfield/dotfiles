@@ -37,7 +37,7 @@ vim.o.expandtab=true
 -- Ui
 vim.o.bg=light
 vim.o.termguicolors=true
-vim.o.cc=121
+vim.o.cc="121"
 vim.o.splitright=true
 vim.o.list=true
 vim.cmd [[highlight ColorColumn ctermbg=0 guibg=lightgrey]]
