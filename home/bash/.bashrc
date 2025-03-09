@@ -1,5 +1,7 @@
 alias vim="nvim"
 
+# eval "$(direnv hook bash)"
+
 if command -v fzf-share >/dev/null; then
   source "$(fzf-share)/key-bindings.bash"
   source "$(fzf-share)/completion.bash"
@@ -16,3 +18,5 @@ fi
 if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
     PATH="${PATH:+"$PATH:"}$1"
 fi
+
+. "$HOME/.local/bin/env"

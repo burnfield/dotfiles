@@ -27,9 +27,9 @@ vim.o.wrap = false
 vim.cmd [[set clipboard+=unnamedplus]]
 
 -- Spaces and tabs
-vim.o.tabstop = 4
-vim.o.softtabstop = 4
-vim.o.shiftwidth = 4
+vim.o.tabstop = 2
+vim.o.softtabstop = 2
+vim.o.shiftwidth = 2
 vim.o.shiftround = true
 vim.o.smartindent = true
 vim.o.expandtab = true
@@ -60,8 +60,15 @@ vim.cmd [[set shortmess+=c]]
 vim.cmd [[set complete-=i]]
 vim.o.completeopt = menu, menuone, noinsert, noselect
 
+vim.g.vimwiki_list = {{
+    path = '~/vimwiki/',
+    syntax = 'markdown',
+    ext = 'md'
+}}
+
 require("lazy").setup("plugins")
 vim.o.background = "light" -- or "light" for light mode
 vim.cmd([[colorscheme catppuccin-latte]])
 require "lspconfig".rust_analyzer.setup {}
 require "lspconfig".lua_ls.setup {}
+require "lspconfig".clangd.setup {}

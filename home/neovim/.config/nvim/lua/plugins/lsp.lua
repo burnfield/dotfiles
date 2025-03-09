@@ -16,21 +16,6 @@ return {
         dependencies = { { 'folke/neodev.nvim', opts = {} } },
         config = function()
             require('neodev').setup()
-            require('mason').setup()
-            require('mason-lspconfig').setup({
-                ensure_installed = { "clangd", "ruff_lsp" },
-                handlers = {
-                    function(server_name)
-                        require("lspconfig")[server_name].setup {}
-                    end,
-                },
-            })
         end,
-    },
-    {
-        'williamboman/mason.nvim',
-        build = ":MasonUpdate",
-        cmd = "Mason",
-        dependencies = { 'williamboman/mason-lspconfig.nvim' },
     },
 }

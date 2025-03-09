@@ -36,6 +36,7 @@ return {
     'tpope/vim-surround',
     'tpope/vim-repeat',
     'tpope/vim-dispatch',
+    'junegunn/vim-easy-align',
     -- 'easymotion/vim-easymotion', TODO: find alternatives
     {
         'vimwiki/vimwiki',

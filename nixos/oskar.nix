@@ -7,7 +7,6 @@
 {
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowBroken = true;
 
   fonts.packages = with pkgs; [ nerdfonts ];
 
@@ -24,13 +23,16 @@
     };
   };
 
+documentation.man = {
+enable = true;
+generateCaches = true;
+};
+
   services.displayManager.defaultSession = "none+i3";
 
   programs = {
     firefox = {
       enable = true;
-      nativeMessagingHosts.packages =
-        [ pkgs.plasma5Packages.plasma-browser-integration ];
     };
     direnv = {
       enable = true;
@@ -41,14 +43,25 @@
         package = pkgs.nix-direnv;
       };
     };
+    neovim = {
+      enable = true;
+      viAlias = true;
+      vimAlias = true;
+      configure = {
+      customRC = ''
+        luafile ~/.config/nvim/init.lua
+      '';
+      };
+    };
   };
 
   # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # $ nix search wge
   environment.systemPackages = with pkgs; [
     alacritty
-    clang
-    clang-tools
+    wezterm
+    # clang
+    # clang-tools
     cura # 3d printer
     fd
     feh
@@ -58,11 +71,11 @@
     chromium
     fzf
     git
-    gnumake
+    # gnumake
     go
     luajitPackages.luarocks
     lua-language-server
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    nixfmt-classic
     powerline-go
     python3
     python311Packages.pip
