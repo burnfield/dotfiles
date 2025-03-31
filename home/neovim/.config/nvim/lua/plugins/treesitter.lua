@@ -1,38 +1,117 @@
-return {
-    {
-        'nvim-treesitter/nvim-treesitter',
-        build = ":TSUpdate",
-        event = { "BufReadPost", "BufNewFile", "BufWritePre", "VeryLazy" },
-        init = function(plugin)
-            -- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
-            -- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which
-            -- no longer trigger the **nvim-treeitter** module to be loaded in time.
-            -- Luckily, the only thins that those plugins need are the custom queries, which we make available
-            -- during startup.
-            require("lazy.core.loader").add_to_rtp(plugin)
-            require("nvim-treesitter.query_predicates")
-        end,
-        cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-        opts = {
-            highlight = { enable = true },
-            indent = { enable = true },
-            ensure_installed = { "bash", "c", "diff", "html", "cpp", "lua", "rust" },
-            incremental_selection = { enable = false }, -- TODO: see lazyvim
-            textobjects = { enable = false },       -- TODO: see lazyvim
-        },
-        config = function(_, opts)
-            if type(opts.ensure_installed) == "table" then
-                ---@type table<string, boolean>
-                local added = {}
-                opts.ensure_installed = vim.tbl_filter(function(lang)
-                    if added[lang] then
-                        return false
-                    end
-                    added[lang] = true
-                    return true
-                end, opts.ensure_installed)
-            end
-            require("nvim-treesitter.configs").setup(opts)
-        end,
+local config = function()
+  local configs = require("nvim-treesitter.configs")
+
+  configs.setup({
+    ensure_installed = {
+      "rust",
+      "c",
+      "lua",
+      "vim",
+      "python",
+      "query",
+      "markdown",
+      "markdown_inline",
+      "yaml",
+      "cpp",
     },
+    sync_install = false,
+    auto_install = false,
+    highlight = {
+      enable = true,
+    },
+    textobjects = {
+      select = {
+        enable = true,
+        lookahead = true,
+        keymaps = {
+          -- You can use the capture groups defined in textobjects.scm
+          ["af"] = { query = "@function.outer", desc = "AroundFunction" },
+          ["if"] = { query = "@function.inner", desc = "InsideFunction" },
+          ["ac"] = { query = "@class.outer", desc = "AroundClass" },
+          ["ic"] = { query = "@class.inner", desc = "InsideClass" },
+          ["aa"] = { query = "@assignment.outer", desc = "AroundAssignment" },
+          ["ia"] = { query = "@assignment.inner", desc = "InsideAssignment" },
+          ["ai"] = {
+            query = "@conditional.outer",
+            desc = "AroundConditional",
+          },
+          ["ii"] = {
+            query = "@conditional.inner",
+            desc = "InsideConditional",
+          },
+        },
+        include_surrounding_whitespace = function(o)
+          return o.query_string:match("@*.outer") and o.selection_mode == "V"
+        end,
+      },
+      move = {
+        enable = true,
+        set_jumps = true, -- whether to set jumps in the jumplist
+        goto_next_start = {
+          ["]m"] = { query = "@function.outer", desc = "Next method" },
+          ["]]"] = { query = "@class.outer", desc = "Next class" },
+          ["]a"] = { query = "@assignment.outer", desc = "Next assignment" },
+          ["]i"] = { query = "@conditional.outer", desc = "Next conditional" },
+        },
+        goto_next_end = {
+          ["]M"] = { query = "@function.outer", desc = "Next method end" },
+          ["]["] = { query = "@class.outer", desc = "Next class end" },
+          ["]A"] = {
+            query = "@assignment.outer",
+            desc = "Next assignment end",
+          },
+          ["]I"] = {
+            query = "@conditional.outer",
+            desc = "Next conditional end",
+          },
+        },
+        goto_previous_start = {
+          ["[m"] = { query = "@function.outer", desc = "Previous method" },
+          ["[["] = { query = "@class.outer", desc = "Previous class" },
+          ["[a"] = {
+            query = "@assignment.outer",
+            desc = "Previous assignment",
+          },
+          ["[i"] = {
+            query = "@conditional.outer",
+            desc = "Previous conditional",
+          },
+        },
+        goto_previous_end = {
+          ["[M"] = { query = "@function.outer", desc = "Previous method end" },
+          ["[]"] = { query = "@class.outer", desc = "Previous class end" },
+          ["[A"] = {
+            query = "@assignment.outer",
+            desc = "Previous assignment end",
+          },
+          ["[I"] = {
+            query = "@conditional.outer",
+            desc = "Previous conditional end",
+          },
+        },
+      },
+    },
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = "<c-space>",
+        scope_incremental = false,
+        node_incremental = "<c-space>",
+        node_decremental = "<bs>",
+      },
+    },
+    indent = {
+      true,
+    },
+  })
+end
+
+return {
+  "nvim-treesitter/nvim-treesitter",
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+  },
+  keys = {},
+  build = ":TSUpdate",
+  config = config,
 }
