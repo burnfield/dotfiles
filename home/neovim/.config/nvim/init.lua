@@ -30,7 +30,6 @@ vim.call("plug#end")
 vim.o.scrolloff = 3
 vim.o.sidescrolloff = 2
 vim.o.linebreak = true
-vim.o.textwidth = 80
 vim.o.swapfile = false
 vim.o.wrap = false
 vim.o.cmdheight = 0
