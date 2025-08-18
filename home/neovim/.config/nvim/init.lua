@@ -196,6 +196,8 @@ end
 wk.add({
     { "t", group = "toggle" },
     { "th", toggle_hint, desc = "inlay hint" },
+    { "tw", "<cmd>set wrap!<cr>", desc = "wrap" },
+    { "ts", "<cmd>set spell!<cr>", desc = "spell" },
 })
 
 wk.add({
