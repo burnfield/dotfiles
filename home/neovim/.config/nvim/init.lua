@@ -145,6 +145,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 require("lint").linters_by_ft = {
     python = { "mypy" },
+    bash = { "shellcheck" },
+    sh = { "shellcheck" },
 }
 
 vim.diagnostic.config({ float = { source = true } })
