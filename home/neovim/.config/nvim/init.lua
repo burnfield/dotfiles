@@ -181,13 +181,16 @@ vim.keymap.set({ "n", "v" }, "<leader>F", "<cmd>FzfLua files<cr>", { desc = "Fil
 vim.keymap.set({ "n", "v" }, "<leader>b", "<cmd>FzfLua buffers<cr>", { desc = "Buffers" })
 vim.keymap.set({ "n", "v" }, "grr", "<cmd>FzfLua lsp_references<cr>", { desc = "refrences" })
 vim.keymap.set({ "n", "v" }, "gO", "<cmd>FzfLua lsp_document_symbols<cr>", { desc = "refrences" })
-vim.keymap.set({ "n", "v" }, "grR", "<cmd>FzfLua grep_cword<cr>", { desc = "Grep current word" })
 vim.keymap.set({ "i" }, "<C-x><C-f>", function()
     require("fzf-lua").complete_path()
 end, { silent = true, desc = "Fuzzy complete path" })
 
 wk.add({
     { "s", group = "surround" },
+    { "<leader>q", group = "query" },
+    { "<leader>qq", "<cmd>FzfLua grep<cr>", desc = "Grep" },
+    { "<leader>qw", "<cmd>FzfLua grep_cword<cr>", desc = "Grep word" },
+    { "<leader>qv", "<cmd>FzfLua grep_visual<cr>", desc = "Grep visual" },
 })
 
 local toggle_hint = function()
