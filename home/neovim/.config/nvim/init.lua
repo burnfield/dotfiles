@@ -182,7 +182,7 @@ vim.keymap.set({ "n", "v" }, "<leader>b", "<cmd>FzfLua buffers<cr>", { desc = "B
 vim.keymap.set({ "n", "v" }, "grr", "<cmd>FzfLua lsp_references<cr>", { desc = "refrences" })
 vim.keymap.set({ "n", "v" }, "gO", "<cmd>FzfLua lsp_document_symbols<cr>", { desc = "refrences" })
 vim.keymap.set({ "n", "v" }, "grR", "<cmd>FzfLua grep_cword<cr>", { desc = "Grep current word" })
-vim.keymap.set({ "n", "v", "i" }, "<C-x><C-f>", function()
+vim.keymap.set({ "i" }, "<C-x><C-f>", function()
     require("fzf-lua").complete_path()
 end, { silent = true, desc = "Fuzzy complete path" })
 
