@@ -32,7 +32,6 @@ vim.o.sidescrolloff = 2
 vim.o.linebreak = true
 vim.o.swapfile = false
 vim.o.wrap = false
-vim.o.cmdheight = 0
 vim.cmd([[set clipboard+=unnamedplus]])
 
 -- Spaces and tabs
