@@ -166,7 +166,7 @@ wk.add({
     {
         { "<leader>c", group = "vimrc" },
         { "<leader>cp", group = "Plug" },
-        { "<leader>ce", "<cmd>e ~/.config/nvim/init.lua<cr>", desc = "Edit" },
+        { "<leader>ce", "<cmd>tabnew ~/.config/nvim/init.lua<cr>", desc = "Edit" },
         { "<leader>cs", "<cmd>source ~/.config/nvim/init.lua<cr>", desc = "Source" },
         { "<leader>cpi", "<cmd>PlugInstall<cr>", desc = "Install" },
         { "<leader>cpc", "<cmd>PlugClean<cr>", desc = "Clean" },
