@@ -74,6 +74,7 @@ vim.cmd([[let g:vimwiki_list = [{'path': '~/vimwiki/',
 
 -- LSP
 vim.lsp.enable("basedpyright")
+vim.lsp.enable("clangd")
 vim.lsp.enable("lua_ls")
 
 -- NON-BUILTINS

@@ -1,12 +1,9 @@
 return {
-    filetypes = { "cpp" },
+    cmd = { "clangd-19" },
+    filetypes = { "cpp", "c", },
     root_markers = {
-        "pyproject.toml",
-        "setup.py",
-        "setup.cfg",
-        "requirements.txt",
-        "Pipfile",
-        "pyrightconfig.json",
+        "compilecommands.json",
+        "WORKSPACE",
         ".git",
     },
 }
