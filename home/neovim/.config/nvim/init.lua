@@ -230,5 +230,6 @@ wk.add({
     { "<leader>gm", "<cmd>Git mergetool<cr>", desc = "Merge" },
     { "<leader>ghr", "<cmd>Gitsigns reset_hunk<cr>", desc = "Reset", mode = { "n", "v" } },
     { "<leader>gha", "<cmd>Gitsigns stage_hunk<cr>", desc = "Add", mode = { "n", "v" } },
+    { "<leader>ghs", "<cmd>Gitsigns stash_hunk<cr>", desc = "stash", mode = { "n", "v" } },
     { "<leader>ghu", "<cmd>Gitsigns undo_stage_hunk<cr>", desc = "Unstage", mode = { "n", "v" } },
 })
