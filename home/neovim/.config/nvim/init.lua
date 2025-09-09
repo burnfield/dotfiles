@@ -16,6 +16,7 @@ Plug("echasnovski/mini.bufremove")
 Plug("williamboman/mason.nvim")
 Plug("stevearc/conform.nvim")
 Plug("folke/lazydev.nvim")
+Plug("vimwiki/vimwiki")
 
 Plug("tpope/vim-fugitive")
 Plug("lewis6991/gitsigns.nvim")
@@ -64,6 +65,12 @@ vim.o.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 vim.cmd([[set shortmess+=c]])
 vim.cmd([[set complete-=i]])
 vim.o.completeopt = menu, menuone, noinsert, noselect
+
+-- vimwiki
+vim.cmd([[let g:vimwiki_list = [{'path': '~/vimwiki/',
+\ 'syntax': 'markdown', 'ext': 'md'}]
+]])
+--
 
 -- LSP
 vim.lsp.enable("basedpyright")
