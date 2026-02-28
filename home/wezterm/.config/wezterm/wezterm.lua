@@ -5,6 +5,8 @@ config.color_scheme = "catppuccin-latte"
 config.font = wezterm.font_with_fallback {
   'Comic Code',
 }
+config.font_size = 17
+config.enable_wayland = true
 config.window_padding = {
   left = 0,
   right = 0,
