@@ -19,7 +19,10 @@ Plug("folke/lazydev.nvim")
 Plug("vimwiki/vimwiki")
 
 Plug("tpope/vim-fugitive")
+Plug("tpope/vim-dispatch")
+Plug("tpope/vim-sleuth")
 Plug("lewis6991/gitsigns.nvim")
+Plug("TamaMcGlinn/vim-gerritbrowse")
 
 Plug("saghen/blink.cmp", { ["tag"] = "*" })
 Plug("L3MON4D3/LuaSnip")
@@ -34,6 +37,7 @@ vim.o.linebreak = true
 vim.o.swapfile = false
 vim.o.wrap = false
 vim.cmd([[set clipboard+=unnamedplus]])
+vim.cmd([[set number]])
 
 -- Spaces and tabs
 vim.o.tabstop = 2
@@ -74,8 +78,11 @@ vim.cmd([[let g:vimwiki_list = [{'path': '~/vimwiki/',
 
 -- LSP
 vim.lsp.enable("basedpyright")
+-- vim.lsp.enable("ty")
+vim.lsp.enable("ruff")
 vim.lsp.enable("clangd")
 vim.lsp.enable("lua_ls")
+vim.lsp.enable("starpls")
 
 -- NON-BUILTINS
 vim.cmd([[colorscheme catppuccin-latte]])
@@ -128,7 +135,16 @@ require("lualine").setup({
 })
 
 vim.keymap.set({ "n", "x" }, "s", "<Nop>")
-require("fzf-lua").setup({ { "hide" } })
+require("fzf-lua").setup({
+    winopts = {
+        height = 0.2, -- window height
+        width = 1, -- window width
+        row = 1, -- window row position (0=top, 1=bottom)
+        col = 1,
+        backdrop = 100,
+    },
+    { "hide" },
+})
 require("gitsigns").setup()
 require("mini.surround").setup()
 require("mini.bufremove").setup({ silent = true })
@@ -152,8 +168,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 require("lint").linters_by_ft = {
     python = { "mypy" },
-    bash = { "shellcheck" },
-    sh = { "shellcheck" },
+    -- bash = { "shellcheck" },
+    -- sh = { "shellcheck" },
 }
 
 vim.diagnostic.config({ float = { source = true } })
@@ -232,4 +248,6 @@ wk.add({
     { "<leader>gha", "<cmd>Gitsigns stage_hunk<cr>", desc = "Add", mode = { "n", "v" } },
     { "<leader>ghs", "<cmd>Gitsigns stash_hunk<cr>", desc = "stash", mode = { "n", "v" } },
     { "<leader>ghu", "<cmd>Gitsigns undo_stage_hunk<cr>", desc = "Unstage", mode = { "n", "v" } },
+    { "<leader>gl", group = "Log" },
+    { "<leader>ghu", "<cmd>Glog -1<cr>", desc = "Unstage", mode = { "n", "v" } },
 })
