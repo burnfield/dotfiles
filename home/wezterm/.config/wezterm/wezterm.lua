@@ -16,4 +16,26 @@ config.window_padding = {
 config.window_decorations = "NONE"
 config.warn_about_missing_glyphs = false
 
+-- Extend QuickSelect (shift+ctrl+space) to match Bazel targets:
+--   //foo/bar  //foo/bar:baz  //foo/bar/...  foo/bar/...  @repo//foo/bar:baz
+config.quick_select_patterns = {
+  [[@?[a-zA-Z0-9_-]*//[a-zA-Z0-9_./-]+(?::[a-zA-Z0-9_.+/-]+|/\.\.\.)?]],
+  [[[a-zA-Z][a-zA-Z0-9_/-]*/\.\.\.]],
+}
+
+-- ctrl+shift+u: QuickSelect a URL and open it in the browser
+config.keys = {
+  {
+    key = 'u',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action.QuickSelectArgs {
+      label = 'open url',
+      action = wezterm.action_callback(function(window, pane)
+        local url = window:get_selection_text_for_pane(pane)
+        wezterm.open_with(url)
+      end),
+    },
+  },
+}
+
 return config
