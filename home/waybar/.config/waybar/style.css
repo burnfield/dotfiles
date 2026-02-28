@@ -1,0 +1,103 @@
+/* Catppuccin Mocha */
+* {
+    font-family: "ComicCode Nerd Font", monospace;
+    font-size: 15px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+window#waybar {
+    background: #1e1e2e;
+    color: #cdd6f4;
+}
+
+/* Workspaces */
+#workspaces button {
+    padding: 0 8px;
+    background: transparent;
+    color: #585b70;
+}
+
+#workspaces button.focused,
+#workspaces button.active {
+    color: #89b4fa;
+    border-bottom: 2px solid #89b4fa;
+}
+
+#workspaces button:hover {
+    background: #313244;
+    color: #cdd6f4;
+}
+
+/* Modules */
+#custom-notification,
+#clock,
+#cpu,
+#memory,
+#network,
+#bluetooth,
+#battery,
+#tray,
+#custom-vpn {
+    padding: 0 12px;
+    color: #cdd6f4;
+}
+
+#custom-notification {
+    color: #f9e2af;
+}
+
+#clock {
+    color: #b4befe;
+}
+
+#cpu {
+    color: #a6e3a1;
+}
+
+#memory {
+    color: #89dceb;
+}
+
+#network {
+    color: #89b4fa;
+}
+
+#network.disconnected {
+    color: #f38ba8;
+}
+
+#custom-vpn {
+    color: #a6e3a1;
+}
+
+#bluetooth {
+    color: #74c7ec;
+}
+
+#bluetooth.disabled {
+    color: #585b70;
+}
+
+#battery {
+    color: #a6e3a1;
+}
+
+#battery.warning:not(.charging) {
+    color: #fab387;
+}
+
+#battery.critical:not(.charging) {
+    color: #f38ba8;
+}
+
+#tray {
+    padding: 0 8px;
+}
+
+#mode {
+    padding: 0 12px;
+    background: #fab387;
+    color: #1e1e2e;
+}

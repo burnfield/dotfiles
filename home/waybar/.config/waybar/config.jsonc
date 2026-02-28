@@ -1,0 +1,68 @@
+{
+    "position": "top",
+    "height": 34,
+    "style": "~/.config/waybar/style.css",
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": ["clock"],
+    "modules-right": ["custom/notification", "cpu", "memory", "custom/vpn", "network", "bluetooth", "battery", "tray"],
+
+    "clock": {
+        "format": "{:%Y-%m-%d %H:%M:%S}",
+        "interval": 1
+    },
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}  {}",
+        "format-icons": {
+            "notification": "󰂚",
+            "none": "󰂜",
+            "dnd-notification": "󰂛",
+            "dnd-none": "󰂛"
+        },
+        "return-type": "json",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
+    "cpu": {
+        "format": "󰻠 {icon} {usage}%",
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+        "interval": 2
+    },
+    "memory": {
+        "format": "󰾆 {}%",
+        "interval": 2
+    },
+    "network": {
+        "interface": "wlp0s20f3",
+        "format-wifi": " {essid} {signalStrength}%",
+        "format-ethernet": " {ifname}",
+        "format-disconnected": "disconnected",
+        "tooltip-format-wifi": "{essid}\n{ipaddr}/{cidr}\nGateway: {gwaddr}"
+    },
+    "custom/vpn": {
+        "exec": "~/.config/waybar/vpn.sh",
+        "interval": 10,
+        "format": "{}"
+    },
+    "bluetooth": {
+        "format": "󰂯",
+        "format-connected": "󰂯 {device_alias}",
+        "format-connected-battery": "󰂯 {device_alias} 󰁹{device_battery_percentage}%",
+        "tooltip-format-connected": "{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}",
+        "on-click": "sh -c 'blueman-manager; pkill -x blueman-applet; pkill -x blueman-tray'"
+    },
+    "battery": {
+        "full-at": 99,
+        "format": "{icon} {capacity}%",
+        "format-full": "󰚥 {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "tooltip-format": "{timeTo}\n{power}W"
+    },
+    "tray": {
+        "spacing": 8
+    }
+}
