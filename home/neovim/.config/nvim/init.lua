@@ -85,7 +85,7 @@ vim.lsp.enable("lua_ls")
 vim.lsp.enable("starpls")
 
 -- NON-BUILTINS
-vim.cmd([[colorscheme catppuccin-latte]])
+vim.cmd([[colorscheme catppuccin-macchiato]])
 require("nvim-treesitter.configs").setup({
     ensure_installed = { "cpp", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "python", "starlark" },
     sync_install = false,
