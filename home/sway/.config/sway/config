@@ -168,14 +168,21 @@ exec swaymsg 'workspace "3: slack"; exec slack'
 # builtin
 output "eDP-1" {
     mode 2560x1600@120.001Hz
-    position 0 1234
+    position 0 0
 }
 
 # monitor at home
 output "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 22421B001957" {
     mode 3840x2160@143.988Hz
     scale 1.75
-    position 0 0
+    position 183 -1234
+}
+
+# monitor at work
+output "Lenovo Group Limited P40w-20 V90D9MTL" {
+    mode 5120x2160@60.000Hz
+    scale 1.75
+    position -183 -1234
 }
 
 workspace "1: term" output "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 22421B001957"
