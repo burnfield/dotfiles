@@ -17,6 +17,12 @@ return {
                 useLibraryCodeForTypes = true,
                 diagnosticMode = "openFilesOnly",
                 typeCheckingMode = "off",
+                -- exclude = {
+                --     "__pycache__",
+                --     ".vscode",
+                --     "build",
+                --     "bazel-*",
+                -- },
             },
         },
     },

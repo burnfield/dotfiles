@@ -11,5 +11,8 @@ return {
         ".git",
     },
     settings = {
+        ty = {
+            diagnosticMode = "workspace",
+        },
     },
 }
