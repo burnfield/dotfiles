@@ -81,6 +81,7 @@ vim.lsp.enable("basedpyright")
 -- vim.lsp.enable("ty")
 vim.lsp.enable("ruff")
 vim.lsp.enable("clangd")
+vim.lsp.enable("rust")
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("starpls")
 
