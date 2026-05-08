@@ -6,3 +6,6 @@
   tool = "mergiraf solve"
 [help]
   autoCorrect = "immediate"
+[user]
+	email = oskar.branfeldt@gmail.com
+	name = burnfield
