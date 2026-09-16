@@ -43,6 +43,10 @@ output * bg #000000 solid_color
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+    bindsym Print exec grim ~/Pictures/screenshot-$(date +%F-%T).png
+    bindsym Shift+Print exec grim -g "$(slurp)" ~/Pictures/screenshot-$(date +%F-%T).png
+    bindsym Alt+Print exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')" ~/Pictures/screenshot-$(date +%F-%T).png
 #
 # Moving around:
 #
@@ -158,36 +162,87 @@ exec_always sh -c 'pkill -x waybar; waybar'
 
 exec swaync
 
-exec swaymsg 'focus output "eDP-1"; workspace "3: slack"'
-exec swaymsg 'focus output "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 22421B001957"; workspace "1: term"'
+# exec swaymsg 'focus output "eDP-1"; workspace "3: slack"'
+# exec swaymsg 'focus output "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 22421B001957"; workspace "1: term"'
 
-exec swaymsg 'workspace "1: term"; exec $term'
-exec swaymsg 'workspace "2: firefox"; exec firefox'
-exec swaymsg 'workspace "3: slack"; exec slack'
+# exec swaymsg 'workspace "1: term"; exec $term'
+# exec swaymsg 'workspace "2: firefox"; exec firefox'
+# exec swaymsg 'workspace "3: slack"; exec slack'
 
 # builtin
-output "eDP-1" {
-    mode 2560x1600@120.001Hz
-    position 0 0
-}
-
+# output "eDP-1" power off
 # monitor at home
 output "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 22421B001957" {
     mode 3840x2160@143.988Hz
-    scale 1.75
-    position 183 -1234
+    scale 2.0
+    position 0 0
 }
-
-# monitor at work
-output "Lenovo Group Limited P40w-20 V90D9MTL" {
+#
+output "Lenovo Group Limited P40w-20 V90D9MTG" {
     mode 5120x2160@60.000Hz
     scale 1.75
     position -183 -1234
 }
+#
+# output "Hewlett Packard HP E242 CN47101890" {
+#     mode 1920x1200@60.000Hz
+#     scale 1.0
+#     position 2560 0
+# }
+#
+# Lenovo Group Limited P40w-20 V90D9MTR
+# output "Hewlett Packard HP E242 CN4710177W" {
+#     mode 1920x1200@60.000Hz
+#     scale 1.0
+#     position 4480 0
+# }
+#
+# Lenovo Group Limited P40w-20 V90DD3A0
+# # monitor at work
+# output "Lenovo Group Limited P40w-20 V90D9MTL" {
+#     mode 5120x2160@60.000Hz
+#     scale 1.75
+#     position -183 -1234
+# }
+#
+output "Lenovo Group Limited P40w-20 V90D9MTR" {
+    mode 5120x2160@60.000Hz
+    scale 1.75
+    position 0 1080
+}
+#
+# output "Lenovo Group Limited P40w-20 V90D9MTB" {
+#     mode 5120x2160@60.000Hz
+#     scale 1.75
+#     position -183 -1234
+# }
 
-workspace "1: term" output "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 22421B001957"
-workspace "2: firefox" output "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 22421B001957"
-workspace "3: slack" output "eDP-1"
+output "Lenovo Group Limited P24h-30 V90D0L1R" {
+    mode 2560x1440@60.000Hz
+    scale 1.5
+    position 0 800
+}
+
+output "Lenovo Group Limited P24h-30 V90C2A1B" {
+    mode 2560x1440@60.000Hz
+    scale 1.5
+    position 1707 800
+}
+
+output "Lenovo Group Limited P40w-20 V90DD3A0" {
+    mode 5120x2160@60.000Hz
+    scale 1.75
+    position 0 1080
+}
+output "Lenovo Group Limited P40w-20 V90D0K6Y" {
+    mode 5120x2160@60.000Hz
+    scale 1.75
+    position 0 1080
+}
+
+# workspace "1: term" output "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 22421B001957"
+# workspace "2: firefox" output "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 22421B001957"
+# workspace "3: slack" output "eDP-1"
 
 input "type:keyboard" {
    xkb_layout us,se

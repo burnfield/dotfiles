@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
-config.color_scheme = "catppuccin-latte"
+config.color_scheme = "catppuccin-macchiato"
 config.font = wezterm.font_with_fallback({
     "Comic Code",
 })
@@ -13,8 +13,15 @@ config.window_padding = {
     top = 0,
     bottom = 0,
 }
+config.scrollback_lines = 100000
 config.window_decorations = "NONE"
 config.warn_about_missing_glyphs = false
+config.ssh_domains = {
+  {
+    name = 'ultra',
+    remote_address = 'ultra',
+  },
+}
 
 -- Extend QuickSelect (shift+ctrl+space) to match Bazel targets:
 --   //foo/bar  //foo/bar:baz  //foo/bar/...  foo/bar/...  @repo//foo/bar:baz
@@ -38,38 +45,49 @@ config.keys = {
     },
 }
 
-wezterm.on("gui-startup", function()
-    local mux = wezterm.mux
-    local tab1, _, window = mux.spawn_window({
-        workspace = "src",
-        cwd = wezterm.home_dir .. "/git/src",
-        args = { os.getenv("SHELL"), "-l", "-c", wezterm.home_dir .. "/.local/bin/nvim" },
-    })
-    tab1:set_title("nvim")
+local projects = require 'projects'
 
-    local tab2 = window:spawn_tab({ cwd = wezterm.home_dir .. "/git/src" })
-    tab2:set_title("shell")
-
-    local tab3 = window:spawn_tab({ cwd = wezterm.home_dir .. "/git/src" })
-    tab3:set_title("shell")
-
-    local tab4, _, window2 = mux.spawn_window({
-        workspace = "dotfiles",
-        cwd = wezterm.home_dir .. "/git/dotfiles",
-        args = { os.getenv("SHELL"), "-l", "-c", wezterm.home_dir .. "/.local/bin/nvim" },
-    })
-    tab4:set_title("nvim")
-
-    local tab5 = window2:spawn_tab({ cwd = wezterm.home_dir .. "/git/dotfiles" })
-    tab5:set_title("shell")
-
-    local tab6 = window2:spawn_tab({ cwd = wezterm.home_dir .. "/git/dotfiles" })
-    tab6:set_title("shell")
-
-    tab5:activate()
-
-    mux.set_active_workspace("src")
-    tab2:activate()
-end)
+config.keys = {
+  -- ... add these new entries to your config.keys table
+  {
+    key = 's',
+    mods = 'CTRL|SHIFT',
+    -- Present in to our project picker
+    action = wezterm.action.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' },
+  },
+}
+-- wezterm.on("gui-startup", function()
+--     local mux = wezterm.mux
+--     local tab1, _, window = mux.spawn_window({
+--         workspace = "src",
+--         cwd = wezterm.home_dir .. "/git/src",
+--         args = { os.getenv("SHELL"), "-l", "-c", wezterm.home_dir .. "/.local/bin/nvim" },
+--     })
+--     tab1:set_title("nvim")
+--
+--     local tab2 = window:spawn_tab({ cwd = wezterm.home_dir .. "/git/src" })
+--     tab2:set_title("shell")
+--
+--     local tab3 = window:spawn_tab({ cwd = wezterm.home_dir .. "/git/src" })
+--     tab3:set_title("shell")
+--
+--     local tab4, _, window2 = mux.spawn_window({
+--         workspace = "dotfiles",
+--         cwd = wezterm.home_dir .. "/git/dotfiles",
+--         args = { os.getenv("SHELL"), "-l", "-c", wezterm.home_dir .. "/.local/bin/nvim" },
+--     })
+--     tab4:set_title("nvim")
+--
+--     local tab5 = window2:spawn_tab({ cwd = wezterm.home_dir .. "/git/dotfiles" })
+--     tab5:set_title("shell")
+--
+--     local tab6 = window2:spawn_tab({ cwd = wezterm.home_dir .. "/git/dotfiles" })
+--     tab6:set_title("shell")
+--
+--     tab5:activate()
+--
+--     mux.set_active_workspace("src")
+--     tab2:activate()
+-- end)
 
 return config

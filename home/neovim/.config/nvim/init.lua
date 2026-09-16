@@ -87,12 +87,23 @@ vim.lsp.enable("starpls")
 
 -- NON-BUILTINS
 vim.cmd([[colorscheme catppuccin-macchiato]])
-require("nvim-treesitter.configs").setup({
-    ensure_installed = { "cpp", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "python", "starlark" },
-    sync_install = false,
-    auto_install = true,
-    highlight = { enable = true },
+require("nvim-treesitter").install({
+    "cpp",
+    "lua",
+    "vim",
+    "vimdoc",
+    "query",
+    "markdown",
+    "markdown_inline",
+    "python",
+    "starlark",
 })
+-- require("nvim-treesitter.configs").setup({
+--     ensure_installed = { "cpp", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "python", "starlark" },
+--     sync_install = false,
+--     auto_install = true,
+--     highlight = { enable = true },
+-- })
 
 -- LUA-LINES
 local breadcrumbs = function()
@@ -129,7 +140,7 @@ require("lualine").setup({
         globalstatus = true,
     },
     sections = {
-        lualine_c = { { "filename", path = 3 } },
+        lualine_c = { { "filename", path = 1 } },
     },
     winbar = winbar,
     inactive_winbar = winbar,

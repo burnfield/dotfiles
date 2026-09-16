@@ -1,6 +1,14 @@
 [alias]
   st = status
   co = checkout
+  # what changed the most?
+  movement = log --format=format: --name-only --since="1 year ago" | sort | uniq -c | sort -nr | head -20
+  # whos the main contributers
+  builders = shortlog -sn --no-merges
+  leavers = builders --since="6 months ago"
+  bugclusters = log -i -E --grep="fix|bug|broken" --name-only --format='' | sort | uniq -c | sort -nr | head -20
+  acceleration = log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
+  firefighting = log --oneline --since="1 year ago" | grep -iE 'revert|hotfix|emergency|rollback'
 [merge]
   conflictStyle = diff3
   tool = "mergiraf solve"
@@ -9,3 +17,5 @@
 [user]
 	email = oskar.branfeldt@gmail.com
 	name = burnfield
+[color "diff"]
+	meta = blue
