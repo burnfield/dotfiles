@@ -2,33 +2,54 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local vim = vim
-local Plug = vim.fn["plug#"]
 
-vim.call("plug#begin")
-Plug("nvim-treesitter/nvim-treesitter")
-Plug("catppuccin/nvim")
-Plug("ibhagwan/fzf-lua")
-Plug("folke/which-key.nvim")
-Plug("nvim-tree/nvim-web-devicons")
-Plug("nvim-lualine/lualine.nvim")
-Plug("echasnovski/mini.surround")
-Plug("echasnovski/mini.bufremove")
-Plug("williamboman/mason.nvim")
-Plug("stevearc/conform.nvim")
-Plug("folke/lazydev.nvim")
-Plug("vimwiki/vimwiki")
+local gh = function(repo)
+    return "https://github.com/" .. repo
+end
 
-Plug("tpope/vim-fugitive")
-Plug("tpope/vim-dispatch")
-Plug("tpope/vim-sleuth")
-Plug("lewis6991/gitsigns.nvim")
-Plug("TamaMcGlinn/vim-gerritbrowse")
+vim.pack.add({
+    gh("nvim-treesitter/nvim-treesitter"),
+    { src = gh("catppuccin/nvim"), name = "catppuccin" },
+    gh("ibhagwan/fzf-lua"),
+    gh("folke/which-key.nvim"),
+    gh("nvim-tree/nvim-web-devicons"),
+    gh("nvim-lualine/lualine.nvim"),
+    gh("echasnovski/mini.surround"),
+    gh("echasnovski/mini.bufremove"),
+    gh("williamboman/mason.nvim"),
+    gh("stevearc/conform.nvim"),
+    gh("folke/lazydev.nvim"),
+    gh("vimwiki/vimwiki"),
 
-Plug("saghen/blink.cmp", { ["tag"] = "*" })
-Plug("L3MON4D3/LuaSnip")
+    gh("tpope/vim-fugitive"),
+    gh("tpope/vim-dispatch"),
+    gh("tpope/vim-sleuth"),
+    gh("lewis6991/gitsigns.nvim"),
+    gh("TamaMcGlinn/vim-gerritbrowse"),
 
-Plug("mfussenegger/nvim-lint")
-vim.call("plug#end")
+    { src = gh("saghen/blink.cmp"), version = vim.version.range("*") },
+    gh("L3MON4D3/LuaSnip"),
+
+    gh("mfussenegger/nvim-lint"),
+})
+
+local pack_clean = function()
+    local unused = vim.iter(vim.pack.get())
+        :filter(function(p)
+            return not p.active
+        end)
+        :map(function(p)
+            return p.spec.name
+        end)
+        :totable()
+
+    if #unused == 0 then
+        vim.notify("vim.pack: nothing to clean")
+        return
+    end
+
+    vim.pack.del(unused)
+end
 
 -- BUILTINS
 vim.o.scrolloff = 3
@@ -201,11 +222,11 @@ local wk = require("which-key")
 wk.add({
     {
         { "<leader>c", group = "vimrc" },
-        { "<leader>cp", group = "Plug" },
+        { "<leader>cp", group = "Pack" },
         { "<leader>ce", "<cmd>tabnew ~/.config/nvim/init.lua<cr>", desc = "Edit" },
         { "<leader>cs", "<cmd>source ~/.config/nvim/init.lua<cr>", desc = "Source" },
-        { "<leader>cpi", "<cmd>PlugInstall<cr>", desc = "Install" },
-        { "<leader>cpc", "<cmd>PlugClean<cr>", desc = "Clean" },
+        { "<leader>cpu", vim.pack.update, desc = "Update" },
+        { "<leader>cpc", pack_clean, desc = "Clean" },
     },
     { "g", group = "goto" },
 })
